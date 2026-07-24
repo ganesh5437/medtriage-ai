@@ -17,6 +17,7 @@ from app.schemas import (
 )
 from app.graph import run_turn
 from app.security import hash_password, verify_password, create_access_token, sanitize_text
+from app.rag import load_knowledge_base
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 logger = logging.getLogger("medtriage.main")
@@ -35,6 +36,7 @@ app.add_middleware(
 @app.on_event("startup")
 def on_startup():
     init_db()
+    load_knowledge_base()
     logger.info("MedTriage AI started. LLM_PROVIDER=%s", settings.LLM_PROVIDER)
 
 
@@ -81,6 +83,7 @@ def chat(payload: ChatRequest, db: Session = Depends(get_db)):
             reply=reply,
             is_emergency=is_emergency,
             extracted=extracted,
+            differential=result.get("differential", []),
         )
     except Exception as exc:
         logger.error("Unhandled error in /chat: %s", exc)

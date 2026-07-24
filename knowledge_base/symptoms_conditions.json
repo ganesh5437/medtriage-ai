@@ -1,0 +1,352 @@
+[
+  {
+    "id": "KB001",
+    "symptoms": ["fever", "chills", "body ache"],
+    "condition": "Influenza (Flu)",
+    "description": "Viral infection characterized by sudden onset of fever, chills, and generalized body ache. Often accompanied by respiratory symptoms.",
+    "recommended_tests": ["Complete Blood Count (CBC)", "Rapid Influenza Diagnostic Test", "Chest X-ray if respiratory symptoms present"],
+    "red_flags": ["High fever >40°C", "Difficulty breathing", "Chest pain", "Altered mental status"],
+    "general_management": "Supportive care with rest, hydration, and acetaminophen for symptom relief. Antivirals may be considered within 48 hours of symptom onset.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB002",
+    "symptoms": ["persistent cough", "fever", "fatigue"],
+    "condition": "Pneumonia",
+    "description": "Infection causing inflammation in lung alveoli. Presents with cough, fever, and respiratory distress.",
+    "recommended_tests": ["Chest X-ray", "Sputum culture", "Complete Blood Count", "Pulse oximetry"],
+    "red_flags": ["Difficulty breathing", "Cyanosis", "Altered mental status", "Severe chest pain"],
+    "general_management": "Antibiotics if bacterial, supportive care for viral. Hospitalization may be needed for severe cases.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB003",
+    "symptoms": ["severe headache", "neck stiffness", "fever"],
+    "condition": "Meningitis",
+    "description": "Inflammation of the meninges (brain membranes). Medical emergency requiring immediate evaluation.",
+    "recommended_tests": ["Lumbar puncture (cerebrospinal fluid analysis)", "Blood cultures", "CT scan of head", "Gram stain"],
+    "red_flags": ["Altered mental status", "Rapid deterioration", "Rash (petechial)", "Signs of sepsis"],
+    "general_management": "Immediate hospitalization. IV antibiotics started empirically before cultures confirmed. ICU monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB004",
+    "symptoms": ["chest pain", "shortness of breath", "palpitations"],
+    "condition": "Acute Coronary Syndrome / Heart Attack",
+    "description": "Sudden reduction in blood flow to the heart. Medical emergency requiring immediate intervention.",
+    "recommended_tests": ["EKG", "Troponin levels", "Complete Blood Count", "Chest X-ray", "Echocardiogram"],
+    "red_flags": ["Severe chest pain", "Loss of consciousness", "Cardiogenic shock signs", "Arrhythmias"],
+    "general_management": "Immediate hospitalization. Aspirin, antiplatelet agents, possible catheterization. ICU monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB005",
+    "symptoms": ["abdominal pain", "nausea", "vomiting"],
+    "condition": "Acute Gastroenteritis",
+    "description": "Inflammation of stomach and intestines, usually viral. Self-limiting in most cases.",
+    "recommended_tests": ["Stool culture if bloody", "Complete Blood Count", "Electrolyte panel", "Abdominal ultrasound if indicated"],
+    "red_flags": ["Severe dehydration", "Bloody stools", "Severe abdominal tenderness", "Signs of peritonitis"],
+    "general_management": "Oral rehydration, antiemetics if needed. Avoid antibiotics unless bacterial infection confirmed.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB006",
+    "symptoms": ["sore throat", "difficulty swallowing", "fever"],
+    "condition": "Pharyngitis / Strep Throat",
+    "description": "Inflammation of the pharynx. Can be viral or bacterial (streptococcal).",
+    "recommended_tests": ["Rapid strep test", "Throat culture", "Complete Blood Count"],
+    "red_flags": ["Difficulty breathing", "Drooling", "Severe pain", "Signs of abscess"],
+    "general_management": "Supportive care. Antibiotics only if bacterial infection confirmed. Pain management with acetaminophen.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB007",
+    "symptoms": ["rash", "itching", "fever"],
+    "condition": "Viral Exanthem / Measles / Chickenpox",
+    "description": "Viral infection with characteristic rash. Varies by causative organism.",
+    "recommended_tests": ["Clinical diagnosis", "Serology if needed", "Tzanck smear for vesicular lesions"],
+    "red_flags": ["Signs of secondary infection", "High fever", "Respiratory involvement", "Complications"],
+    "general_management": "Supportive care. Antivirals for specific viruses (chickenpox, etc). Isolation precautions.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB008",
+    "symptoms": ["joint pain", "swelling", "morning stiffness"],
+    "condition": "Rheumatoid Arthritis / Osteoarthritis",
+    "description": "Chronic joint inflammation. RA is autoimmune, OA is degenerative.",
+    "recommended_tests": ["Rheumatoid Factor", "Anti-CCP antibodies", "ESR", "CRP", "X-rays of affected joints"],
+    "red_flags": ["Severe functional impairment", "Systemic symptoms", "Signs of vasculitis"],
+    "general_management": "NSAIDs, DMARDs for RA, physical therapy, rest. Long-term management with rheumatology.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB009",
+    "symptoms": ["tremor", "rigidity", "bradykinesia"],
+    "condition": "Parkinson's Disease",
+    "description": "Neurodegenerative disorder affecting dopamine-producing neurons.",
+    "recommended_tests": ["Clinical diagnosis", "MRI brain if atypical features", "DaTscan if needed"],
+    "red_flags": ["Rapid progression", "Atypical features", "Early dementia", "Autonomic dysfunction"],
+    "general_management": "Dopaminergic medications (Levodopa), physical therapy, speech therapy. Multidisciplinary approach.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB010",
+    "symptoms": ["confusion", "memory loss", "disorientation"],
+    "condition": "Dementia / Cognitive Decline",
+    "description": "Progressive loss of cognitive function. Multiple causes including Alzheimer's.",
+    "recommended_tests": ["Cognitive screening (MMSE)", "MRI brain", "Blood work (B12, thyroid)", "Neuropsychological testing"],
+    "red_flags": ["Rapid progression", "Behavioral changes", "Signs of delirium", "Safety concerns"],
+    "general_management": "Identify underlying cause. Cholinesterase inhibitors for Alzheimer's. Cognitive rehabilitation.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB011",
+    "symptoms": ["fatigue", "weakness", "pale skin"],
+    "condition": "Anemia",
+    "description": "Reduced hemoglobin or red blood cell count. Multiple causes.",
+    "recommended_tests": ["Complete Blood Count", "Iron studies", "Vitamin B12 level", "Folate level", "Reticulocyte count"],
+    "red_flags": ["Severe anemia (<7 g/dL)", "Cardiac symptoms", "Syncope", "Severe dyspnea"],
+    "general_management": "Treat underlying cause. Iron, B12, or folate supplementation as needed. Transfusion if severe.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB012",
+    "symptoms": ["weight loss", "increased urination", "increased thirst"],
+    "condition": "Diabetes Mellitus",
+    "description": "Metabolic disorder with elevated blood glucose. Type 1 (autoimmune) or Type 2 (insulin resistance).",
+    "recommended_tests": ["Fasting glucose", "HbA1c", "Oral glucose tolerance test", "C-peptide", "Autoantibodies"],
+    "red_flags": ["Diabetic ketoacidosis signs", "Hyperosmolar state", "Severe hyperglycemia (>400)", "Complications"],
+    "general_management": "Lifestyle modification, oral medications for Type 2, insulin for Type 1. Regular monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB013",
+    "symptoms": ["persistent cough", "hemoptysis", "night sweats"],
+    "condition": "Tuberculosis",
+    "description": "Mycobacterial infection spread by airborne droplets. Serious if untreated.",
+    "recommended_tests": ["Chest X-ray", "Sputum smear microscopy", "TB culture", "Interferon-gamma release assay"],
+    "red_flags": ["Cavitary disease", "Positive sputum smears", "Immunocompromised state", "Drug-resistant TB"],
+    "general_management": "Multi-drug therapy for 6+ months. Isolation precautions. Public health reporting.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB014",
+    "symptoms": ["back pain", "numbness", "weakness in legs"],
+    "condition": "Spinal Cord Compression / Disc Herniation",
+    "description": "Pressure on spinal cord or nerve roots. Can be from disc herniation, stenosis, or other causes.",
+    "recommended_tests": ["MRI spine", "CT spine if MRI contraindicated", "Myelography", "Neurological examination"],
+    "red_flags": ["Progressive neurological deficit", "Cauda equina syndrome", "Bowel/bladder dysfunction", "Myelopathy"],
+    "general_management": "Conservative care initially. Referral to neurosurgery if progressive symptoms or cauda equina.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB015",
+    "symptoms": ["severe headache", "visual changes", "weakness"],
+    "condition": "Stroke / Cerebrovascular Accident",
+    "description": "Interruption of blood supply to the brain. Medical emergency.",
+    "recommended_tests": ["CT head (non-contrast)", "MRI brain", "CTA", "EKG", "Troponin"],
+    "red_flags": ["Onset <4.5 hours (thrombolytic window)", "Signs of hemorrhage", "Large infarct", "Edema"],
+    "general_management": "Immediate hospitalization. Thrombolytics if ischemic and within window. ICU monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB016",
+    "symptoms": ["anxiety", "palpitations", "sweating"],
+    "condition": "Panic Disorder / Anxiety",
+    "description": "Psychological condition with physical symptoms. Episodic or chronic.",
+    "recommended_tests": ["EKG to rule out cardiac", "Thyroid function", "Holter monitor if indicated"],
+    "red_flags": ["Suicidal ideation", "Substance abuse", "Secondary to medical condition"],
+    "general_management": "Cognitive behavioral therapy, SSRIs. Breathing exercises. Rule out medical causes first.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB017",
+    "symptoms": ["blurred vision", "eye pain", "redness"],
+    "condition": "Acute Glaucoma / Uveitis",
+    "description": "Acute eye conditions requiring urgent evaluation.",
+    "recommended_tests": ["Intraocular pressure measurement", "Slit lamp examination", "Gonioscopy", "Fundoscopy"],
+    "red_flags": ["High intraocular pressure (>40)", "Corneal edema", "Vision loss", "Fixed pupil"],
+    "general_management": "Ophthalmology referral urgent. Topical and systemic medications to lower pressure.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB018",
+    "symptoms": ["severe dizziness", "vertigo", "nausea"],
+    "condition": "Benign Paroxysmal Positional Vertigo (BPPV)",
+    "description": "Most common cause of vertigo. Displacement of otoliths in inner ear.",
+    "recommended_tests": ["Dix-Hallpike maneuver", "MRI if atypical", "Audiometry"],
+    "red_flags": ["Hearing loss", "Tinnitus", "Neurological signs", "Continuous symptoms"],
+    "general_management": "Canalith repositioning procedures (Epley maneuver). Vestibular therapy.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB019",
+    "symptoms": ["frequent urination", "dysuria", "urgency"],
+    "condition": "Urinary Tract Infection (UTI)",
+    "description": "Bacterial infection of urinary system. Common, usually responsive to antibiotics.",
+    "recommended_tests": ["Urinalysis", "Urine culture", "Renal ultrasound if recurrent"],
+    "red_flags": ["Fever >38.5°C", "Flank pain (pyelonephritis)", "Signs of sepsis", "Pregnant or immunocompromised"],
+    "general_management": "Antibiotics based on culture. Hydration. Analgesics for symptom relief.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB020",
+    "symptoms": ["shortness of breath", "wheezing", "cough"],
+    "condition": "Asthma / COPD",
+    "description": "Chronic obstructive airway disease. Asthma (reversible), COPD (progressive).",
+    "recommended_tests": ["Spirometry", "Peak flow", "Chest X-ray", "Allergy testing"],
+    "red_flags": ["Severe bronchospasm", "Hypoxia", "Status asthmaticus", "Acute exacerbation"],
+    "general_management": "Beta-agonists, corticosteroids, bronchodilators. Identify and avoid triggers.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB021",
+    "symptoms": ["severe abdominal pain", "vomiting", "constipation"],
+    "condition": "Bowel Obstruction",
+    "description": "Mechanical or functional blockage of the bowel.",
+    "recommended_tests": ["Abdominal X-ray", "CT abdomen/pelvis", "Complete Blood Count", "Electrolytes"],
+    "red_flags": ["Peritoneal signs", "Signs of perforation", "Severe dehydration", "Signs of sepsis"],
+    "general_management": "NPO status, IV fluids. Nasogastric tube. Surgical evaluation if mechanical obstruction.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB022",
+    "symptoms": ["muscle pain", "weakness", "stiffness"],
+    "condition": "Polymyalgia Rheumatica / Myositis",
+    "description": "Inflammatory muscle condition. Often in elderly population.",
+    "recommended_tests": ["ESR", "CRP", "Muscle enzymes (CK)", "EMG if myositis", "Muscle biopsy if needed"],
+    "red_flags": ["Rapid progression", "Respiratory muscle involvement", "Dysphagia"],
+    "general_management": "Corticosteroids for PMR. Immunosuppressants for myositis. Physical therapy.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB023",
+    "symptoms": ["hypertension", "end-organ damage", "seizures"],
+    "condition": "Hypertensive Crisis",
+    "description": "Severely elevated blood pressure with potential end-organ damage.",
+    "recommended_tests": ["Blood pressure monitoring", "Urine protein", "Creatinine", "ECG", "Fundoscopy"],
+    "red_flags": ["BP >180/120", "Chest pain", "Neurological symptoms", "Pulmonary edema"],
+    "general_management": "Immediate hospitalization. IV antihypertensives. ICU monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB024",
+    "symptoms": ["abdominal pain", "jaundice", "dark urine"],
+    "condition": "Acute Hepatitis / Liver Disease",
+    "description": "Inflammation of the liver. Multiple etiologies.",
+    "recommended_tests": ["Liver function tests", "Bilirubin", "Transaminases", "Prothrombin time", "Hepatitis serology"],
+    "red_flags": ["Elevated INR", "Encephalopathy", "Ascites", "Signs of acute liver failure"],
+    "general_management": "Supportive care. Identify and treat underlying cause. Hepatology referral if severe.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB025",
+    "symptoms": ["fever", "rash", "conjunctivitis"],
+    "condition": "Measles / Rubella",
+    "description": "Viral infection with characteristic prodrome and rash.",
+    "recommended_tests": ["Serological testing", "Viral culture", "PCR"],
+    "red_flags": ["Encephalitis", "Pneumonia", "Severe secondary infection", "Immunocompromised"],
+    "general_management": "Supportive care. Vitamin A supplementation for measles. Isolation precautions.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB026",
+    "symptoms": ["tremor", "anxiety", "palpitations", "weight loss"],
+    "condition": "Hyperthyroidism / Thyroid Storm",
+    "description": "Excess thyroid hormone production. Thyroid storm is life-threatening emergency.",
+    "recommended_tests": ["TSH", "Free T4", "Free T3", "Thyroid antibodies"],
+    "red_flags": ["High fever", "Altered mental status", "Cardiac arrhythmias", "Shock"],
+    "general_management": "Antithyroid drugs, beta-blockers. Iodine after antithyroids started. ICU if thyroid storm.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB027",
+    "symptoms": ["fatigue", "weight gain", "constipation"],
+    "condition": "Hypothyroidism",
+    "description": "Insufficient thyroid hormone production.",
+    "recommended_tests": ["TSH", "Free T4", "Thyroid antibodies"],
+    "red_flags": ["Myxedema", "Severe hypothermia", "Altered mental status"],
+    "general_management": "Levothyroxine replacement. Dose titration based on TSH. Regular monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB028",
+    "symptoms": ["excessive sweating", "tremor", "nervousness"],
+    "condition": "Hypoglycemia",
+    "description": "Low blood glucose. Medical emergency if severe.",
+    "recommended_tests": ["Serum glucose", "Insulin level", "C-peptide if suspected insulinoma"],
+    "red_flags": ["Altered mental status", "Seizures", "Loss of consciousness", "Severe hypoglycemia <40"],
+    "general_management": "Glucose supplementation (oral if conscious, IV if not). Identify and treat cause.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB029",
+    "symptoms": ["kidney pain", "hematuria", "nausea"],
+    "condition": "Nephrolithiasis / Kidney Stones",
+    "description": "Formation of mineral stones in the urinary tract.",
+    "recommended_tests": ["Non-contrast CT (CT KUB)", "Urinalysis", "Uric acid", "Calcium level"],
+    "red_flags": ["Infected obstructed system", "Signs of sepsis", "Severe hydronephrosis"],
+    "general_management": "Pain management, hydration. Urology referral if intervention needed.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB030",
+    "symptoms": ["night sweats", "fatigue", "weight loss"],
+    "condition": "Malignancy / Cancer",
+    "description": "Malignant neoplasm with systemic symptoms.",
+    "recommended_tests": ["CBC", "Metabolic panel", "Imaging (CT/PET)", "Tumor markers", "Biopsy"],
+    "red_flags": ["Metastatic disease", "Paraneoplastic syndrome", "Severe anemia", "Elevated tumor markers"],
+    "general_management": "Oncology referral. Staging. Treatment plan based on cancer type and stage.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB031",
+    "symptoms": ["fever", "confusion", "rash"],
+    "condition": "Sepsis",
+    "description": "Systemic infection with inflammatory response. Medical emergency.",
+    "recommended_tests": ["Blood cultures", "CBC", "Lactate", "Procalcitonin", "Imaging based on suspected source"],
+    "red_flags": ["Hypotension", "Organ dysfunction", "High lactate", "Altered mental status"],
+    "general_management": "Immediate hospitalization. Broad-spectrum antibiotics. ICU care. Source control.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB032",
+    "symptoms": ["sudden vision loss", "eye pain", "colored halos"],
+    "condition": "Acute Angle-Closure Glaucoma",
+    "description": "Ophthalmic emergency with rapid intraocular pressure rise.",
+    "recommended_tests": ["Intraocular pressure", "Gonioscopy", "Anterior chamber depth"],
+    "red_flags": ["IOP >40", "Corneal edema", "Vision loss", "Midriasis"],
+    "general_management": "Urgent ophthalmology. Topical and systemic pressure-lowering agents. Laser iridotomy.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB033",
+    "symptoms": ["chest pain", "dyspnea", "syncope"],
+    "condition": "Pulmonary Embolism",
+    "description": "Blood clot in pulmonary arteries. Potentially fatal.",
+    "recommended_tests": ["D-dimer", "CT angiography", "EKG", "Troponin", "BNP"],
+    "red_flags": ["Hemodynamic instability", "Massive PE", "Hypoxia <90%", "Hemoptysis"],
+    "general_management": "Anticoagulation. Thrombolytics for massive PE. ICU monitoring.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB034",
+    "symptoms": ["severe back pain", "hypotension", "pulsatile mass"],
+    "condition": "Abdominal Aortic Aneurysm (AAA)",
+    "description": "Dilation of the abdominal aorta. Rupture is life-threatening.",
+    "recommended_tests": ["Abdominal ultrasound", "CT angiography", "EKG", "Cardiac markers"],
+    "red_flags": ["Rupture signs", "Hypotension", "Pulsatile mass", "Severe shock"],
+    "general_management": "Immediate surgical evaluation. Emergency repair if rupture suspected.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  },
+  {
+    "id": "KB035",
+    "symptoms": ["memory loss", "behavioral changes", "tremor"],
+    "condition": "Alzheimer's Disease",
+    "description": "Progressive neurodegenerative disorder. Most common cause of dementia.",
+    "recommended_tests": ["MRI brain", "Cognitive assessment (MMSE)", "PET scan", "Biomarkers (amyloid, tau)"],
+    "red_flags": ["Rapid progression", "Early age of onset", "Atypical features"],
+    "general_management": "Cholinesterase inhibitors. Memantine. Cognitive rehabilitation. Support for caregivers.",
+    "disclaimer": "Educational example only. Not real medical advice."
+  }
+]

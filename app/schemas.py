@@ -23,6 +23,7 @@ class ChatResponse(BaseModel):
     reply: str
     is_emergency: bool
     extracted: SymptomExtraction
+    differential: list[dict] = Field(default_factory=list)
     disclaimer: str = "⚠ AI-generated. Not reviewed by a licensed clinician. Not a diagnosis."
 
 
