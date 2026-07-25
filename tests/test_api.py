@@ -61,3 +61,25 @@ def test_register_and_login():
     resp = client.post("/auth/login", json={"email": "test_patient@example.com", "password": "secret123"})
     assert resp.status_code == 200
     assert "access_token" in resp.json()
+
+
+def test_upload_lab_unsupported_file_rejected_cleanly():
+    """Required test 8: unsupported file type returns clean error, not a 500."""
+    # First create a session
+    resp = client.post("/chat", json={"message": "hello"})
+    session_id = resp.json()["session_id"]
+
+    # Upload a .txt file (unsupported)
+    files = {"file": ("notes.txt", b"just some plain text", "text/plain")}
+    resp = client.post(f"/upload-lab?session_id={session_id}", files=files)
+
+    # Should be a clean 400, not a 500 crash
+    assert resp.status_code == 400
+    assert "Unsupported" in resp.json()["detail"]
+
+
+def test_upload_lab_session_not_found():
+    """Uploading to a nonexistent session should 404 cleanly, not crash."""
+    files = {"file": ("lab.pdf", b"%PDF-1.4 fake pdf content", "application/pdf")}
+    resp = client.post("/upload-lab?session_id=nonexistent-session-id", files=files)
+    assert resp.status_code == 404

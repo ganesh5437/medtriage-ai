@@ -49,3 +49,11 @@ class TokenResponse(BaseModel):
     access_token: str
     token_type: str = "bearer"
     role: str
+
+
+class LabUploadResponse(BaseModel):
+    session_id: str
+    parsed: bool
+    values: dict = Field(default_factory=dict)
+    error: str | None = None
+    disclaimer: str = "⚠ AI-generated. Not reviewed by a licensed clinician. Not a diagnosis."
