@@ -4,21 +4,25 @@ main.py — FastAPI app entrypoint. Phase 1 routes: /health, /chat,
 report, sessions) land in later phases.
 """
 import logging
+import io
 
 from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 
 from app.config import settings
-from app.db import init_db, get_db, ChatSession, Message, User, LabReport
+from app.db import init_db, get_db, ChatSession, Message, User, LabReport, Report, Symptom
 from app.schemas import (
     ChatRequest, ChatResponse, HealthResponse, SymptomExtraction,
-    RegisterRequest, LoginRequest, TokenResponse, LabUploadResponse,
+    RegisterRequest, LoginRequest, TokenResponse, LabUploadResponse, VoiceResponse,
 )
 from app.graph import run_turn
 from app.security import hash_password, verify_password, create_access_token, sanitize_text
 from app.rag import load_knowledge_base
 from app.labs import parse_lab_report
+from app.voice import transcribe_audio
+from app.reports import compile_report, generate_pdf
 
 logging.basicConfig(level=settings.LOG_LEVEL)
 logger = logging.getLogger("medtriage.main")
@@ -68,6 +72,13 @@ def chat(payload: ChatRequest, db: Session = Depends(get_db)):
         try:
             db.add(Message(session_id=session_id, role="patient", content=clean_message))
             db.add(Message(session_id=session_id, role="ai", content=reply))
+            for symptom_name in extracted.symptoms:
+                db.add(Symptom(
+                    session_id=session_id,
+                    name=symptom_name,
+                    duration=extracted.duration,
+                    severity=extracted.severity,
+                ))
             if is_emergency:
                 from app.db import EmergencyEvent
                 db.add(EmergencyEvent(session_id=session_id, trigger_reason=result.get("emergency_reason") or "unknown"))
@@ -191,3 +202,115 @@ async def upload_lab(
             values={},
             error="Lab report could not be processed. You can continue the session without it.",
         )
+
+
+# Max audio file size — reuse same limit as lab uploads (gap-fix: file validation)
+_MAX_AUDIO_MB = settings.MAX_UPLOAD_MB * 4  # audio files run bigger than lab docs
+
+
+@app.post("/voice", response_model=VoiceResponse)
+async def voice(file: UploadFile = File(...)):
+    try:
+        audio_bytes = await file.read()
+
+        max_bytes = _MAX_AUDIO_MB * 1024 * 1024
+        if len(audio_bytes) > max_bytes:
+            return VoiceResponse(
+                success=False,
+                text="",
+                error=f"Audio file too large. Max size is {_MAX_AUDIO_MB}MB.",
+            )
+
+        if not audio_bytes:
+            return VoiceResponse(success=False, text="", error="Empty audio file received.")
+
+        result = transcribe_audio(audio_bytes, file.filename or "audio.webm")
+
+        return VoiceResponse(
+            success=result["success"],
+            text=result["text"],
+            error=result["error"],
+        )
+
+    except Exception as exc:
+        logger.error("Unhandled error in /voice: %s", exc)
+        # gap-fix: voice failure falls back to text input, never crashes
+        return VoiceResponse(
+            success=False,
+            text="",
+            error="Voice unavailable. Please type your message.",
+        )
+
+
+@app.get("/report/{session_id}")
+def get_report(session_id: str, db: Session = Depends(get_db)):
+    report = compile_report(db, session_id)
+    if "error" in report and report["error"] == "Session not found":
+        raise HTTPException(status_code=404, detail="Session not found")
+    return report
+
+
+@app.get("/report/{session_id}/pdf")
+def get_report_pdf(session_id: str, db: Session = Depends(get_db)):
+    report = compile_report(db, session_id)
+    if "error" in report and report["error"] == "Session not found":
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    pdf_bytes = generate_pdf(report)
+
+    # Persist the generated report (best-effort, never blocks download)
+    try:
+        existing = db.query(Report).filter(Report.session_id == session_id).first()
+        if not existing:
+            db.add(Report(
+                session_id=session_id,
+                differential_json=report.get("differential", {}),
+                recommendations_json={"lab_findings": report.get("lab_findings", {})},
+                status="pending",
+            ))
+            db.commit()
+    except Exception as db_exc:
+        logger.error("DB write failed on /report/pdf: %s", db_exc)
+        db.rollback()
+
+    return StreamingResponse(
+        io.BytesIO(pdf_bytes),
+        media_type="application/pdf",
+        headers={"Content-Disposition": f"attachment; filename=report_{session_id}.pdf"},
+    )
+
+
+@app.get("/sessions")
+def list_sessions(db: Session = Depends(get_db)):
+    sessions = db.query(ChatSession).order_by(ChatSession.started_at.desc()).all()
+    result = []
+    for s in sessions:
+        symptom_names = [sym.name for sym in db.query(Symptom).filter(Symptom.session_id == s.id).all()]
+        result.append({
+            "session_id": s.id,
+            "status": s.status,
+            "started_at": s.started_at.isoformat() if s.started_at else None,
+            "symptoms_summary": symptom_names,
+        })
+    return {"sessions": result}
+
+
+@app.get("/sessions/{session_id}/messages")
+def get_session_messages(session_id: str, db: Session = Depends(get_db)):
+    session = db.get(ChatSession, session_id)
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+
+    messages = (
+        db.query(Message)
+        .filter(Message.session_id == session_id)
+        .order_by(Message.created_at)
+        .all()
+    )
+    return {
+        "session_id": session_id,
+        "messages": [
+            {"role": m.role, "content": m.content, "created_at": m.created_at.isoformat() if m.created_at else None}
+            for m in messages
+        ],
+    }

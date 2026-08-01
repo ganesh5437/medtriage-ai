@@ -57,3 +57,9 @@ class LabUploadResponse(BaseModel):
     values: dict = Field(default_factory=dict)
     error: str | None = None
     disclaimer: str = "⚠ AI-generated. Not reviewed by a licensed clinician. Not a diagnosis."
+
+
+class VoiceResponse(BaseModel):
+    success: bool
+    text: str
+    error: str | None = None

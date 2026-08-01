@@ -65,15 +65,12 @@ def test_register_and_login():
 
 def test_upload_lab_unsupported_file_rejected_cleanly():
     """Required test 8: unsupported file type returns clean error, not a 500."""
-    # First create a session
     resp = client.post("/chat", json={"message": "hello"})
     session_id = resp.json()["session_id"]
 
-    # Upload a .txt file (unsupported)
     files = {"file": ("notes.txt", b"just some plain text", "text/plain")}
     resp = client.post(f"/upload-lab?session_id={session_id}", files=files)
 
-    # Should be a clean 400, not a 500 crash
     assert resp.status_code == 400
     assert "Unsupported" in resp.json()["detail"]
 
@@ -83,3 +80,52 @@ def test_upload_lab_session_not_found():
     files = {"file": ("lab.pdf", b"%PDF-1.4 fake pdf content", "application/pdf")}
     resp = client.post("/upload-lab?session_id=nonexistent-session-id", files=files)
     assert resp.status_code == 404
+
+
+def test_sessions_list_endpoint():
+    """GET /sessions should return a list, never crash even if empty."""
+    resp = client.get("/sessions")
+    assert resp.status_code == 200
+    assert "sessions" in resp.json()
+    assert isinstance(resp.json()["sessions"], list)
+
+
+def test_get_report_for_valid_session():
+    """Full flow: create session via /chat, then fetch its report."""
+    chat_resp = client.post("/chat", json={"message": "I have joint pain and fatigue"})
+    session_id = chat_resp.json()["session_id"]
+
+    resp = client.get(f"/report/{session_id}")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["session_id"] == session_id
+    assert "disclaimer" in body
+
+
+def test_get_report_pdf_download():
+    """PDF download endpoint should return valid PDF bytes."""
+    chat_resp = client.post("/chat", json={"message": "I have a headache"})
+    session_id = chat_resp.json()["session_id"]
+
+    resp = client.get(f"/report/{session_id}/pdf")
+    assert resp.status_code == 200
+    assert resp.headers["content-type"] == "application/pdf"
+    assert resp.content[:4] == b"%PDF"
+
+
+def test_get_report_for_nonexistent_session():
+    """Nonexistent session should 404 cleanly, not crash."""
+    resp = client.get("/report/nonexistent-session-id")
+    assert resp.status_code == 404
+
+
+def test_session_messages_endpoint():
+    """GET /sessions/{id}/messages should return chat history."""
+    chat_resp = client.post("/chat", json={"message": "I have a sore throat"})
+    session_id = chat_resp.json()["session_id"]
+
+    resp = client.get(f"/sessions/{session_id}/messages")
+    assert resp.status_code == 200
+    body = resp.json()
+    assert body["session_id"] == session_id
+    assert len(body["messages"]) >= 2  # patient + ai turn
